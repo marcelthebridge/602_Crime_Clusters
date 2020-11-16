@@ -9,6 +9,7 @@ Homework 2 for UMBCs Data 602 Course. This project makes use of Baltiore City's 
   - [Streamlined Data Report](HW2_Report.ipynb)
   - [Project Utilities](utils.py)
   - [README](READ.me)
+  - [Baltimore City Neighborhood Map](Baltimore_neighborhoods_map.png)
 
 ## Goals
   - Create a RF model to describe which CrimeCodes have the highest Incidence and Frequency
