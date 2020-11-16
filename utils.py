@@ -103,7 +103,7 @@ def RF_Modeling(df):
     fig = px.scatter(RF_data, x='Recency', y='Frequency', color='RF_Concern_Level')
     fig.show()
 
-def KM_Modeling(df):
+def KM_Modeling(df, clusters):
     KM_data = df.groupby(['Neighborhood', 'Description'])['Description'].count().unstack()
 
     KM_data = KM_data.fillna(0)
@@ -131,7 +131,7 @@ def KM_Modeling(df):
 
     # I think here we want to pick 5 or 7?
 
-    kmeans = KMeans(n_clusters=4, init='k-means++', random_state=42)
+    kmeans = KMeans(n_clusters=clusters, init='k-means++', random_state=42)
     y_kmeans = kmeans.fit_predict(KM_standardized)
 
     y_kmeans1 = y_kmeans + 1
@@ -149,3 +149,9 @@ def KM_Modeling(df):
     plt.figure(figsize=(12, 6))
     sns.scatterplot(x=KM_data['Auto_Crime'], y=KM_data['Violent_Crime'], hue=y_kmeans1)
     plt.show()
+    
+    plt.figure(figsize=(12, 6))
+    sns.scatterplot(x=KM_data['Robbery'], y=KM_data['Auto_Crime'], hue=y_kmeans1)
+    plt.show()
+
+    return KM_data.sort_values(['Violent_Crime','Robbery'])
